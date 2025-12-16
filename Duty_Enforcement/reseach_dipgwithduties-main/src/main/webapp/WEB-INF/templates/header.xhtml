@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <div class="header-container">
+        <div class="logo">
+            <h:graphicImage library="images" name="logo.png" height="40"/>
+        </div>
+        <div class="title">
+            <h1>
+                <ui:insert name="pageTitle">#{pageTitle}</ui:insert>
+            </h1>
+        </div>
+    </div>
+
+    <h:outputStylesheet>
+        .header-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            padding: 0 20px;
+        }
+
+        .title {
+            flex-grow: 1;
+        }
+
+        .title h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+    </h:outputStylesheet>
+
+</ui:composition>

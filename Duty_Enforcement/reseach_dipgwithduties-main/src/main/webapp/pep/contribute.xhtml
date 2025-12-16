@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="title">Contribute Data</ui:define>
+
+    <ui:define name="pageTitle">Contribute Data</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="form-container">
+                <div class="form-group">
+                    <h:outputLabel for="data" value="Contribution Data:"/>
+                    <h:inputTextarea id="data"
+                                     value="#{contributeDataBean.contributionData}"
+                                     rows="5"
+                                     required="true"
+                                     requiredMessage="Contribution data is required"/>
+                </div>
+
+                <div class="form-actions">
+                    <h:commandButton value="Contribute"
+                                     action="#{contributeDataBean.contributeData}"/>
+                </div>
+
+                <h:messages globalOnly="true" styleClass="messages"/>
+
+                <h:outputText value="#{contributeDataBean.message}"
+                              rendered="#{not empty contributeDataBean.message}"
+                              styleClass="result-message"/>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

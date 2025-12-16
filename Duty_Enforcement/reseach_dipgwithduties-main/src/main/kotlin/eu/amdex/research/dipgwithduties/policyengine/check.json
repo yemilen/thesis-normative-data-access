@@ -1,0 +1,591 @@
+{
+  "all-disabled-transitions": [
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "assign_external_duty",
+      "tagged-type": "product",
+      "textual": "assign_external_duty(external_duty(\"example-duty\"),actor(\"C\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "external_duty_approved",
+      "tagged-type": "product",
+      "textual": "external_duty_approved(external_duty(\"example-duty\"),actor(\"C\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "external_duty_rejected",
+      "tagged-type": "product",
+      "textual": "external_duty_rejected(external_duty(\"example-duty\"),actor(\"C\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "new_external_duty",
+      "tagged-type": "product",
+      "textual": "new_external_duty(external_duty(\"example-duty\"),actor(\"C\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "assign_external_duty",
+      "tagged-type": "product",
+      "textual": "assign_external_duty(external_duty(\"example-duty\"),actor(\"C\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "external_duty_approved",
+      "tagged-type": "product",
+      "textual": "external_duty_approved(external_duty(\"example-duty\"),actor(\"C\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "external_duty_rejected",
+      "tagged-type": "product",
+      "textual": "external_duty_rejected(external_duty(\"example-duty\"),actor(\"C\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "new_external_duty",
+      "tagged-type": "product",
+      "textual": "new_external_duty(external_duty(\"example-duty\"),actor(\"C\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "assign_external_duty",
+      "tagged-type": "product",
+      "textual": "assign_external_duty(external_duty(\"example-duty\"),actor(\"H\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "external_duty_approved",
+      "tagged-type": "product",
+      "textual": "external_duty_approved(external_duty(\"example-duty\"),actor(\"H\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "external_duty_rejected",
+      "tagged-type": "product",
+      "textual": "external_duty_rejected(external_duty(\"example-duty\"),actor(\"H\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "new_external_duty",
+      "tagged-type": "product",
+      "textual": "new_external_duty(external_duty(\"example-duty\"),actor(\"H\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "assign_external_duty",
+      "tagged-type": "product",
+      "textual": "assign_external_duty(external_duty(\"example-duty\"),actor(\"H\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "external_duty_approved",
+      "tagged-type": "product",
+      "textual": "external_duty_approved(external_duty(\"example-duty\"),actor(\"H\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "external_duty_rejected",
+      "tagged-type": "product",
+      "textual": "external_duty_rejected(external_duty(\"example-duty\"),actor(\"H\"),actor(\"H\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        }
+      ],
+      "fact-type": "new_external_duty",
+      "tagged-type": "product",
+      "textual": "new_external_duty(external_duty(\"example-duty\"),actor(\"H\"),actor(\"H\"))"
+    }
+  ],
+  "all-duties": [
+    {
+      "arguments": [
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "example-duty",
+      "tagged-type": "product",
+      "textual": "example-duty(actor(\"H\"),actor(\"C\"))"
+    }
+  ],
+  "all-enabled-transitions": [],
+  "created_facts": [],
+  "errors": [],
+  "inst-query-results": [],
+  "new-disabled-transitions": [],
+  "new-duties": [],
+  "new-enabled-transitions": [],
+  "new-state": 15,
+  "old-state": 14,
+  "output-events": [],
+  "query-results": [],
+  "response": "success",
+  "source_contents": [
+    {
+      "fact-type": "actor",
+      "tagged-type": "string",
+      "textual": "actor(\"C\")",
+      "value": "C"
+    },
+    {
+      "fact-type": "actor",
+      "tagged-type": "string",
+      "textual": "actor(\"H\")",
+      "value": "H"
+    },
+    {
+      "fact-type": "external_duty",
+      "tagged-type": "string",
+      "textual": "external_duty(\"example-duty\")",
+      "value": "example-duty"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "example-duty",
+      "tagged-type": "product",
+      "textual": "example-duty(actor(\"H\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "violated",
+      "tagged-type": "product",
+      "textual": "violated(external_duty(\"example-duty\"),actor(\"H\"),actor(\"C\"))"
+    }
+  ],
+  "target_contents": [
+    {
+      "fact-type": "actor",
+      "tagged-type": "string",
+      "textual": "actor(\"C\")",
+      "value": "C"
+    },
+    {
+      "fact-type": "actor",
+      "tagged-type": "string",
+      "textual": "actor(\"H\")",
+      "value": "H"
+    },
+    {
+      "fact-type": "external_duty",
+      "tagged-type": "string",
+      "textual": "external_duty(\"example-duty\")",
+      "value": "example-duty"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "example-duty",
+      "tagged-type": "product",
+      "textual": "example-duty(actor(\"H\"),actor(\"C\"))"
+    },
+    {
+      "arguments": [
+        {
+          "fact-type": "external_duty",
+          "tagged-type": "string",
+          "textual": "external_duty(\"example-duty\")",
+          "value": "example-duty"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"H\")",
+          "value": "H"
+        },
+        {
+          "fact-type": "actor",
+          "tagged-type": "string",
+          "textual": "actor(\"C\")",
+          "value": "C"
+        }
+      ],
+      "fact-type": "violated",
+      "tagged-type": "product",
+      "textual": "violated(external_duty(\"example-duty\"),actor(\"H\"),actor(\"C\"))"
+    }
+  ],
+  "terminated-duties": [],
+  "terminated_facts": [],
+  "violations": [
+    {
+      "value": {
+        "arguments": [
+          {
+            "fact-type": "actor",
+            "tagged-type": "string",
+            "textual": "actor(\"H\")",
+            "value": "H"
+          },
+          {
+            "fact-type": "actor",
+            "tagged-type": "string",
+            "textual": "actor(\"C\")",
+            "value": "C"
+          }
+        ],
+        "fact-type": "example-duty",
+        "tagged-type": "product",
+        "textual": "example-duty(actor(\"H\"),actor(\"C\"))"
+      },
+      "violation": "duty"
+    }
+  ]
+}

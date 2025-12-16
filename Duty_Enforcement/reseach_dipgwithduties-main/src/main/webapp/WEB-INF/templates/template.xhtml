@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <meta charset="UTF-8"/>
+    <title><ui:insert name="title">Default Title</ui:insert></title>
+    <h:outputStylesheet>
+        body {
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "menu content";
+            grid-template-rows: 60px 1fr;
+            grid-template-columns: 200px 1fr;
+            min-height: 100vh;
+        }
+
+        #header {
+            grid-area: header;
+            background-color: #f4f4f4;
+            color: white;
+            padding: 1em;
+        }
+
+        #menu {
+            grid-area: menu;
+            background-color: #f4f4f4;
+            padding: 1em;
+        }
+
+        #content {
+            grid-area: content;
+            padding: 1em;
+        }
+    </h:outputStylesheet>
+</h:head>
+
+<h:body>
+    <div id="header">
+        <ui:insert name="header">
+            <ui:include src="/WEB-INF/templates/header.xhtml"/>
+        </ui:insert>
+    </div>
+
+    <div id="menu">
+        <ui:insert name="menu">
+            <ui:include src="/WEB-INF/templates/menu.xhtml"/>
+        </ui:insert>
+    </div>
+
+    <div id="content">
+        <ui:insert name="content">
+            <h2>Default Content</h2>
+        </ui:insert>
+    </div>
+</h:body>
+</html>

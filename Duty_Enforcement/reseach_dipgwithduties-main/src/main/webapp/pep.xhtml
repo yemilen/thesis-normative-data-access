@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+<h:head>
+    <title>PEP Web Interface</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h2>Contribute Data</h2>
+        <div>
+            <h:outputLabel for="member" value="Member ID: "/>
+            <h:inputText id="member" value="#{pepBean.member}"/>
+        </div>
+        <div>
+            <h:outputLabel for="contributionData" value="Data: "/>
+            <h:inputTextarea id="contributionData" value="#{pepBean.contributionData}"/>
+        </div>
+        <h:commandButton value="Contribute" action="#{pepBean.contributeData}"/>
+
+        <h2>Request Data</h2>
+        <div>
+            <h:outputLabel for="researcher" value="Researcher ID: "/>
+            <h:inputText id="researcher" value="#{pepBean.researcher}"/>
+        </div>
+        <div>
+            <h:outputLabel for="requestData" value="Request: "/>
+            <h:inputTextarea id="requestData" value="#{pepBean.requestData}"/>
+        </div>
+        <h:commandButton value="Request" action="#{pepBean.requestData}"/>
+
+        <h2>Select Data (Committee)</h2>
+        <div>
+            <h:outputLabel for="selectionData" value="Selection: "/>
+            <h:inputTextarea id="selectionData" value="#{pepBean.selectionData}"/>
+        </div>
+        <h:commandButton value="Select" action="#{pepBean.selectData}"/>
+
+        <h:messages globalOnly="true"/>
+        <h:outputText value="#{pepBean.message}" rendered="#{not empty pepBean.message}"/>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="view" value="#{dutiesListBean.viewType}"/>
+        <f:event type="preRenderView" listener="#{dutiesListBean.loadMessages}"/>
+    </f:metadata>
+
+    <ui:define name="title">#{dutiesListBean.title}</ui:define>
+    <ui:define name="pageTitle">#{dutiesListBean.title}</ui:define>
+
+    <ui:define name="content">
+        <div class="duties-container">
+            <div class="view-tabs">
+                <h:link outcome="duties-list" value="All Duties"
+                        styleClass="tab-link #{dutiesListBean.viewType eq 'all' ? 'active' : ''}">
+                    <f:param name="view" value="all"/>
+                </h:link>
+                <h:link outcome="duties-list" value="Assigned To Me"
+                        styleClass="tab-link #{dutiesListBean.viewType eq 'to' ? 'active' : ''}">
+                    <f:param name="view" value="to"/>
+                </h:link>
+                <h:link outcome="duties-list" value="Assigned By Me"
+                        styleClass="tab-link #{dutiesListBean.viewType eq 'from' ? 'active' : ''}">
+                    <f:param name="view" value="from"/>
+                </h:link>
+            </div>
+
+            <h:panelGroup rendered="#{empty dutiesListBean.messages}">
+                <div class="no-duties">
+                    <h:outputText value="No duties found"
+                                  rendered="#{empty dutiesListBean.statusMessage}"/>
+                    <h:outputText value="#{dutiesListBean.statusMessage}"
+                                  styleClass="error-message"
+                                  rendered="#{not empty dutiesListBean.statusMessage}"/>
+                </div>
+            </h:panelGroup>
+
+            <h:dataTable value="#{dutiesListBean.messages}" var="message"
+                         styleClass="duties-table"
+                         rendered="#{not empty dutiesListBean.messages}">
+                <h:column>
+                    <f:facet name="header">From</f:facet>
+                    #{message.from}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">To</f:facet>
+                    #{message.to}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Subject</f:facet>
+                    <h:link outcome="duties-message" value="#{message.subject}">
+                        <f:param name="uuid" value="#{message.uuid}"/>
+                    </h:link>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                    #{message.datetime}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    #{message.status}
+                </h:column>
+            </h:dataTable>
+        </div>
+
+        <h:outputStylesheet>
+            .duties-container {
+                padding: 1rem;
+            }
+
+            .view-tabs {
+                margin-bottom: 2rem;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .tab-link {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                color: #495057;
+                margin-right: 0.5rem;
+            }
+
+            .tab-link.active {
+                color: #007bff;
+                border-bottom: 2px solid #007bff;
+            }
+
+            .duties-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .duties-table th, .duties-table td {
+                padding: 0.75rem;
+                border: 1px solid #dee2e6;
+            }
+
+            .duties-table th {
+                background-color: #f8f9fa;
+            }
+
+            .no-duties {
+                text-align: center;
+                padding: 2rem;
+                background-color: #f8f9fa;
+                border-radius: 4px;
+            }
+
+            .error-message {
+                color: #dc3545;
+            }
+        </h:outputStylesheet>
+    </ui:define>
+</ui:composition>

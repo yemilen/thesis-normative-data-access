@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+
+<f:view>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{emailBean.loadUsers}"/>
+    </f:metadata>
+
+    <h:head>
+        <title>Email System</title>
+        <style>
+            .email-list { margin: 10px 0; }
+            .email-item { cursor: pointer; padding: 5px; border: 1px solid #ddd; margin: 2px 0; }
+            .email-item:hover { background-color: #f0f0f0; }
+            .email-detail { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+            .compose-form { margin: 10px 0; }
+            .section { margin: 20px 0; }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form id="userForm">
+            <h:selectOneMenu value="#{emailBean.currentUser}" onchange="submit()"
+                             valueChangeListener="#{emailBean.updateCurrentUser}">
+                <f:selectItem itemLabel="Select User" itemValue=""/>
+                <f:selectItems value="#{emailBean.users}" var="user" itemValue="#{user}"/>
+            </h:selectOneMenu>
+            <h:inputText value="#{emailBean.currentUser}">
+                <f:ajax event="blur" listener="#{emailBean.updateCurrentUser}" render="inboxForm sentForm"/>
+            </h:inputText>
+        </h:form>
+
+        <div class="section">
+            <h2>Inbox</h2>
+            <h:form id="inboxForm">
+                <h:commandButton value="Refresh" action="#{emailBean.refreshInbox}"/>
+                <div class="email-list">
+                    <ui:repeat value="#{emailBean.inboxEmails}" var="email">
+                        <div class="email-item">
+                            <h:commandLink action="#{emailBean.selectEmail(email)}">
+                                <h:outputText value="From: #{email.from} - Subject: #{email.subject} - Date: #{email.datetime}"/>
+                            </h:commandLink>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </h:form>
+        </div>
+
+        <div class="section">
+            <h2>Sent</h2>
+            <h:form id="sentForm">
+                <h:commandButton value="Refresh" action="#{emailBean.refreshSent}"/>
+                <div class="email-list">
+                    <ui:repeat value="#{emailBean.sentEmails}" var="email">
+                        <div class="email-item">
+                            <h:commandLink action="#{emailBean.selectEmail(email)}">
+                                <h:outputText value="To: #{email.to} - Subject: #{email.subject} - Date: #{email.datetime}"/>
+                            </h:commandLink>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </h:form>
+        </div>
+
+        <h:panelGroup id="emailDetail" rendered="#{emailBean.selectedEmail != null}">
+            <div class="email-detail">
+                <h3>Email Details</h3>
+                <p>From: #{emailBean.selectedEmail.from}</p>
+                <p>To: #{emailBean.selectedEmail.to}</p>
+                <p>Subject: #{emailBean.selectedEmail.subject}</p>
+                <p>Date: #{emailBean.selectedEmail.datetime}</p>
+                <p>Body:</p>
+                <pre>#{emailBean.selectedEmail.body}</pre>
+                <h:form>
+                    <h:commandButton value="Close" action="#{emailBean.clearSelectedEmail}"/>
+                </h:form>
+            </div>
+        </h:panelGroup>
+
+        <div class="section">
+            <h2>Compose Email</h2>
+            <h:form id="composeForm" class="compose-form">
+                <div>
+                    <h:outputLabel for="recipient" value="To:"/>
+                    <h:inputText id="recipient" value="#{emailBean.recipient}" required="true"/>
+                </div>
+                <div>
+                    <h:outputLabel for="subject" value="Subject:"/>
+                    <h:inputText id="subject" value="#{emailBean.subject}" required="true"/>
+                </div>
+                <div>
+                    <h:outputLabel for="body" value="Body:"/>
+                    <h:inputTextarea id="body" value="#{emailBean.body}" rows="5" cols="50" required="true"/>
+                </div>
+                <h:commandButton value="Send" action="#{emailBean.sendEmail}"/>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+</html>

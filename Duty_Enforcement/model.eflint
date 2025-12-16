@@ -1,0 +1,60 @@
+
+// representation of external duties
+Fact external_duty Identified by String
+Placeholder duty For external_duty
+
+// which may be in various states
+Fact created 	  Identified by duty * actor1 * actor2
+Fact completed  Identified by duty * actor1 * actor2
+Fact violated	  Identified by duty * actor1 * actor2
+Fact pending    Identified by duty * actor1 * actor2
+
+// and transition between states by triggering these events:
+Event new_external_duty Related to duty, actor1, actor2
+  Creates pending(), duty, actor1, actor2
+
+Event assign_external_duty Related to duty, actor1, actor2
+  Creates created()
+  Terminates completed(), violated(), pending()
+  
+Event external_duty_approved Related to duty, actor1, actor2
+  Creates completed()
+  Terminates created(), violated(), pending()
+  
+Event external_duty_rejected Related to duty, actor1, actor2
+  Creates violated()
+  Terminates completed(), created(), pending()
+  
+// An example specification of a duty and how it would respond to its external status 
+Duty example-duty Holder actor1 Claimant actor2
+  Conditioned by Not(completed(duty="example-duty"))
+  Holds when created(duty="example-duty")
+            ,violated(duty="example-duty")
+  Violated when violated(duty="example-duty")
+Extend Event new_external_duty 
+  Creates example-duty() When external_duty == "example-duty".
+
+// Example scenario
+new_external_duty("example-duty", H, C).
+?!created("example-duty", H, C).
+!?Holds(example-duty(H,C)).
+?pending("example-duty", H, C).
+
+assign_external_duty("example-duty", H, C).
+?created("example-duty", H, C).
+?Holds(example-duty(H,C)).
+?!pending("example-duty", H, C).
+
+external_duty_rejected("example-duty", H, C).
+?!created("example-duty", H, C).
+?violated("example-duty", H, C).
+?Violated(example-duty(H, C)).
+
+external_duty_approved("example-duty", H, C).
+?!created("example-duty", H, C).
+?!Holds(example-duty(H,C)).
+?!violated("example-duty", H, C).
+?!Violated(example-duty(H, C)).
+?!pending("example-duty", H, C).
+?completed("example-duty", H, C).
+

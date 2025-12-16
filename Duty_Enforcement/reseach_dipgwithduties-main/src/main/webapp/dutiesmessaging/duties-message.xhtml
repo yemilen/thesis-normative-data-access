@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="uuid" value="#{dutiesMessageBean.uuid}"/>
+        <f:event type="preRenderView" listener="#{dutiesMessageBean.loadMessage}"/>
+    </f:metadata>
+
+    <ui:define name="title">Duty Message Details</ui:define>
+    <ui:define name="pageTitle">Duty Message Details</ui:define>
+
+    <ui:define name="content">
+        <h:form rendered="#{dutiesMessageBean.message != null}">
+            <div class="message-details">
+                <div class="detail-row">
+                    <h:outputLabel value="From:" styleClass="detail-label"/>
+                    <h:outputText value="#{dutiesMessageBean.message.from}" styleClass="detail-value"/>
+                </div>
+
+                <div class="detail-row">
+                    <h:outputLabel value="To:" styleClass="detail-label"/>
+                    <h:outputText value="#{dutiesMessageBean.message.to}" styleClass="detail-value"/>
+                </div>
+
+                <div class="detail-row">
+                    <h:outputLabel value="Subject:" styleClass="detail-label"/>
+                    <h:outputText value="#{dutiesMessageBean.message.subject}" styleClass="detail-value"/>
+                </div>
+
+                <div class="detail-row">
+                    <h:outputLabel value="Date:" styleClass="detail-label"/>
+                    <h:outputText value="#{dutiesMessageBean.message.datetime}" styleClass="detail-value"/>
+                </div>
+
+                <div class="detail-row">
+                    <h:outputLabel value="Status:" styleClass="detail-label"/>
+                    <h:outputText value="#{dutiesMessageBean.message.status}" styleClass="detail-value"/>
+                </div>
+
+                <div class="detail-row">
+                    <h:outputLabel value="Body:" styleClass="detail-label"/>
+                    <h:outputText value="#{dutiesMessageBean.message.body}"
+                                  styleClass="detail-value message-body"/>
+                </div>
+
+                <div class="actions" rendered="#{dutiesMessageBean.message.status == 'ACTIVE'}">
+                    <h:commandButton value="#{dutiesMessageBean.message.completedButton}"
+                                     action="#{dutiesMessageBean.handleCompleted}"
+                                     styleClass="action-button"
+                                     rendered="#{not empty dutiesMessageBean.message.completedButton}"/>
+
+                    <h:commandButton value="#{dutiesMessageBean.message.violatedButton}"
+                                     action="#{dutiesMessageBean.handleViolated}"
+                                     styleClass="action-button"
+                                     rendered="#{not empty dutiesMessageBean.message.violatedButton}"/>
+                </div>
+
+                <h:outputText value="#{dutiesMessageBean.statusMessage}"
+                              styleClass="status-message"
+                              rendered="#{not empty dutiesMessageBean.statusMessage}"/>
+            </div>
+        </h:form>
+
+        <div class="error-message" rendered="#{dutiesMessageBean.message == null}">
+            <h:outputText value="#{dutiesMessageBean.statusMessage}"/>
+        </div>
+
+        <h:outputStylesheet>
+            .message-details {
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 1rem;
+            }
+
+            .detail-row {
+                margin-bottom: 1rem;
+            }
+
+            .detail-label {
+                font-weight: bold;
+                display: inline-block;
+                width: 100px;
+            }
+
+            .detail-value {
+                margin-left: 1rem;
+            }
+
+            .message-body {
+                display: block;
+                margin-top: 0.5rem;
+                white-space: pre-wrap;
+                padding: 1rem;
+                background-color: #f8f9fa;
+                border-radius: 4px;
+            }
+
+            .actions {
+                margin-top: 2rem;
+            }
+
+            .action-button {
+                margin-right: 1rem;
+                padding: 0.5rem 1rem;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .action-button:hover {
+                background-color: #0056b3;
+            }
+
+            .status-message {
+                display: block;
+                margin-top: 1rem;
+                padding: 1rem;
+                background-color: #d4edda;
+                border: 1px solid #c3e6cb;
+                border-radius: 4px;
+                color: #155724;
+            }
+
+            .error-message {
+                padding: 1rem;
+                background-color: #f8d7da;
+                border: 1px solid #f5c6cb;
+                border-radius: 4px;
+                color: #721c24;
+            }
+        </h:outputStylesheet>
+    </ui:define>
+</ui:composition>

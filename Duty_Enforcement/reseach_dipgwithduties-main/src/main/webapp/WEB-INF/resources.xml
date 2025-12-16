@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <Resource id="DossierStoreDB" type="javax.sql.DataSource">
+        JdbcDriver = org.h2.Driver
+        <!--JdbcUrl = jdbc:h2:file:~/h2/dipg;AUTO_SERVER=TRUE-->
+        jdbcUrl = jdbc:h2:mem:dipg
+        UserName = sa
+        Password = password
+
+        <!-- Increase Pool Size -->
+        MaxActive = 200
+        MaxIdle = 50
+        MinIdle = 10
+        MaxWait = 30000
+
+        <!-- Leak Detection / Cleanup -->
+        <!-- Closes connections that have been checked out for longer than 60 seconds -->
+        RemoveAbandoned = true
+        RemoveAbandonedTimeout = 60
+        LogAbandoned = false
+
+        TestOnBorrow = true
+        ValidationQuery = SELECT 1
+    </Resource>
+</tomee>

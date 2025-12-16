@@ -1,0 +1,127 @@
+// Scenario 1: Member Makes Data Available
+
+Fact person
+Fact member // members of the consotium 
+Fact dcog  // Dutch Childhood Oncology Group which facilitates the registry
+Fact dataset
+Fact donor  // Patient who donated data
+
+// GDPR related concepts
+Fact subject Derived from donor
+Fact controller Derived from member
+Fact processor Derived from dcog
+Fact purpose Derived from DIPGResearch
+Fact subject-of Identified by donor * dataset
+Fact consent Identified by donor * member * purpose
+
+// GDPR requirements for collecting personal data
+Act collect-personal-data
+  Actor controller
+  Recipient subject
+  Related to data, processor, purpose
+  Creates processes(processor, data, controller, purpose)
+  Holds when consent(subject, controller, purpose)
+
+Fact processes Identified by processor * data * controller * purpose
+Fact data-uploaded Identified by dataset * member
+// When member makes data available, they become the owner
+Fact owner-of Identified by member * dataset
+// this links a person to institution
+Fact affiliated Identified by person * member
+Fact dataset-submitted Identified by dataset * member
+
+// duty enumeration
+Fact duty-enum Identified by "duty-to-submit-coded-dataset", "duty-to-submit-coded-dataset", "duty-to-verify-coding", "duty-to-declare-national-obligations"
+Fact duty-holds-for Identified by duty-enum * string
+
+// First the Member contributes data to registry
+
+Act make-data-available
+  Actor member
+  Recipient dcog
+  Related to dataset
+  Creates dataset-submitted(dataset, member)
+         ,duty-to-submit-coded-dataset(member, dcog, dataset)
+         ,duty-to-verify-coding(dcog, member, dataset)
+         ,duty-to-declare-national-obligations(member, dcog, dataset)
+  Holds when member && dcog
+
+
+// synchronization clause for making make-data-available inherit the precondition consent(subject, controller, purpose) for all donors in the dataset.
+Extend Act make-data-available
+  Syncs with (Foreach donor:collect-personal-data(controller = member,
+                         subject    = donor,
+                         data       = dataset,
+                         processor  = dcog,
+                         purpose    = DIPGResearch)
+    When subject-of(donor, dataset))
+
+Duty duty-to-submit-coded-dataset
+  Holder member
+  Claimant dcog
+  Related to dataset
+  Violated when dataset-submitted(dataset, member) && coding-rejected(dataset, member)
+
+// Duty for dcog(PEP) to verify that submitted dataset is coded
+Duty duty-to-verify-coding
+  Holder dcog
+  Claimant member
+  Related to dataset
+  Violated when data-uploaded(dataset, member) && !coded(dataset, member)
+
+Fact coded Identified by dataset * member
+
+// PEP Plugin checks pseudonymization and confirms data is coded
+Act confirm-coding
+  Actor dcog
+  Related to dataset, member
+  Creates coded(dataset, member)
+  Terminates duty-to-verify-coding(dcog, member, dataset)
+  Holds when dcog && dataset-submitted(dataset, member) && !coding-rejected(dataset, member)
+
+Fact coding-rejected Identified by dataset * member
+
+// when Plugin detects data is not coded
+Act reject-coding
+  Actor dcog
+  Related to dataset, member
+  Creates coding-rejected(dataset, member)
+  Terminates duty-to-verify-coding(dcog, member, dataset)
+  Holds when dcog && dataset-submitted(dataset, member)
+
+// Complete the upload after coding is verified
+Act complete-upload
+  Actor dcog
+  Recipient member
+  Related to dataset
+  Conditioned by coded(dataset, member)
+  Creates data-uploaded(dataset, member)
+  Holds when dcog && member
+
+// Duty for member to declare national law obligations before contributing data
+Duty duty-to-declare-national-obligations
+  Holder member
+  Claimant dcog
+  Related to dataset
+
+Act declare-national-obligations
+  Actor member
+  Recipient dcog
+  Related to obligations, dataset
+  Creates national-obligations-declared(member, obligations)
+  Terminates duty-to-declare-national-obligations(member, dcog, dataset)
+  Holds when member && dcog
+  
+Fact obligations
+
+Fact national-obligations-declared Identified by member * String
+
+//extend duty-holds-for with derivation rules 
+
+Extend Fact duty-holds-for Derived from duty-holds-for("duty-to-submit-coded-dataset", researcher)
+    Holds when(duty-to-submit-coded-dataset(member, dcog, dataset))            
+Extend Fact duty-holds-for Derived from duty-holds-for("duty-to-verify-coding", dcog)
+    Holds when(duty-to-submit-coded-dataset(dcog, member, dataset)) 
+Extend Fact duty-holds-for Derived from duty-holds-for("duty-to-declare-national-obligations", member)
+    Holds when(duty-to-submit-coded-dataset(member, dcog, dataset)) 
+
