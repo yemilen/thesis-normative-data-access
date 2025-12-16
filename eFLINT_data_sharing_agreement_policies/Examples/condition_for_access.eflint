@@ -1,0 +1,125 @@
+Fact controller Derived from member // imported GDPR concepts
+Fact processor Derived from dcog
+Fact subject Derived from donor
+Fact purpose Identified by DIPGResearch, Other
+
+Fact coded Identified by actual_dataset
+Fact data
+Fact code Identified by Int
+Fact dataset Identified by code
+Fact actual_dataset
+Fact purpose
+Fact researcher
+Fact person
+Fact donor Identified by String
+Fact dcog Identified by DCOG
+Fact dipg Identified by DIPG
+Fact ecommittee Identified by EC
+Fact findings Identified by data * project
+Fact member // institutes are members
+Fact country
+Fact country_of Identified by member * country
+Fact coordinator Identified by member // coordinator of the country in which they resides
+Fact access Identified by researcher * project * dataset
+Fact project
+Fact proposal Identified by purpose * project // proposal is always for a project
+Fact access Identified by researcher * project * dataset
+Fact researcher Derived from person When affiliated-with(person, member)
+                                                 ,member
+Fact affiliated-with Identified by person * member
+Fact controller Identified by researcher
+Fact eligible-access Identified by dataset * purpose
+Fact thirdparty
+Fact consent Identified by donor * member * purpose
+//Fact ecommittee-consent
+//Fact eligile-donor Identified by donor * purpose // they have not specified on who is the eligible patient
+//Fact termsconditions // its something the EC has to formulate
+//Fact transfer-datset-uncoded  Identified by dataset Holds when
+//Fact personal-data Identified by data Holds when
+  //(Exists !code())
+
+Act send-proposal 
+  Actor researcher
+  Recipient ecommittee
+  Related to project, purpose
+  Creates proposal(purpose, project)
+  Holds when researcher && ecommittee
+  
+Act approve-proposal // when a project is approved, it creates a letter of apporval
+  Actor ecommittee
+  Recipient researcher
+  Related to project
+  creates send-letter-of-apporval()
+  Holds when member, proposal
+
+Act send-letter-of-apporval // letter of approval is sent to confirm project proposal approval
+  Actor dipg
+  Recipient researcher
+  Related to proposal
+  creates send-dataset()
+  Holds when // signed by researcher
+
+Act send-dataset // when letter of approval is sent back with a signature then data is sent/made available
+  Actor dipg
+  Recipient researcher
+  Related to purpose, project
+  creates access ()
+  Holds when (Exists letter-of-approval())
+
+Act access // researcher access the dataset
+  Actor researcher
+  Recipient dipg
+  Related to dataset
+  Creates track-usage()
+  Holds when // not sure
+
+Act track-usage() // dipg tracks the usage of the dataset
+  Actor dipg
+  Recipient researcher
+  Related to purpose
+  Creates usage-for-purpose-duty()
+
+Duty usage-for-purpose-duty() // duty for the researcher to use data according to purpose
+  Holder researcher
+  Claimant dipg
+  Related to access
+  Violated when (Exists !eligible-purpose())
+
+Act terminate-access // when the duty is violated, dipg terminates access of the researcher
+  Actor dipg
+  Recipient researcher
+  Related to access
+  Terminates usage-for-purpose-duty(), access()
+
+Act share-thirdparty // sharing data to third party creates the duty that the researcher collect consent from EC
+  Actor researcher
+  Recipient thirdparty
+  Related to usage-for-purpose()
+  Creates show-consent-duty()
+  Holds when consent()
+
+Duty show-consent-duty //
+  Holder researcher
+  Claimant dipg
+  Related to thirdparty
+  Violated when !consent()
+
+Act terminate-access // violating the previous duty causes dipg to terminate access
+  Actor dipg
+  Recipient researcher
+  Related to thirdparty
+  Terminates show-consent-duty(), access()
+
+Act make_data_available  // permission to transfer from member to DIPG reigstry 
+  Actor dipg
+  Recipient member
+  Related to project
+  Creates transfer-dataset()
+  Holds when member, proposal
+
+Act transfer-dataset // the act of transfering the dataset
+  Actor member
+  Recipient dipg
+  Related to dataset
+  Holds when coded(dataset) && (Forall donor: consent(donor, member,DIPGResearch))
+  Creates assign-member-ownerright(),compliance-duty(), allow-further-usage-purpose-duty()

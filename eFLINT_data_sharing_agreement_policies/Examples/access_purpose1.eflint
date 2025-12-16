@@ -1,0 +1,38 @@
+#
+
+Fact producer
+Fact employee
+Fact role Identified by "researcher", "radiologist", "marketer"
+Fact datasets Identified by "genetics", "prognosis", "gender"
+Fact permission_to_give_access Identified by role * datasets
+Fact permission_to_access Identified by employee * datasets
+
+Act give_access
+  Actor producer
+  Recipient employee
+  Related to datasets
+  Holds when permission_to_give_access(role, datasets) When Holds (role)
+
+Act access_data
+  Actor employee
+  Recipient producer
+  Related to datasets
+  Holds when permission_to_access(employee, datasets)
+
+##
+
+
+
+###
+
+permission_to_give_access ("researcher", "genetics").
+employee (Bob).
+producer (Alice).
+role ("researcher").
+
+
+
+####
+
+give_access(Alice, Bob, "genetics").
+access_data(Bob, Alice, "genetics").

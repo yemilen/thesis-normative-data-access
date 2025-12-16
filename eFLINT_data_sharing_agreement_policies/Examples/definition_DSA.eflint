@@ -1,0 +1,39 @@
+Fact controller Derived from member // imported GDPR concepts
+Fact processor Derived from dcog
+Fact subject Derived from donor
+Fact purpose Identified by DIPGResearch, Other
+
+Fact coded Identified by actual_dataset
+Fact data
+Fact code Identified by Int
+Fact dataset Identified by code
+Fact actual_dataset
+Fact purpose
+Fact researcher
+Fact person
+Fact donor Identified by String
+Fact dcog Identified by DCOG
+Fact dipg Identified by DIPG
+Fact ecommittee Identified by EC
+Fact findings Identified by data * project
+Fact member // institutes are members
+Fact country
+Fact country_of Identified by member * country
+Fact coordinator Identified by member // coordinator of the country in which they resides
+Fact access Identified by researcher * project * dataset
+Fact project
+Fact proposal Identified by purpose * project // proposal is always for a project
+Fact access Identified by researcher * project * dataset
+Fact researcher Derived from person When affiliated-with(person, member)
+                                                 ,member
+Fact affiliated-with Identified by person * member
+Fact controller Identified by researcher
+Fact eligible-access Identified by dataset * purpose
+Fact thirdparty
+Fact consent Identified by donor * member * purpose
+//Fact ecommittee-consent
+//Fact eligile-donor Identified by donor * purpose // they have not specified on who is the eligible patient
+//Fact termsconditions // its something the EC has to formulate
+//Fact transfer-datset-uncoded  Identified by dataset Holds when
+//Fact personal-data Identified by data Holds when
+  //(Exists !code())

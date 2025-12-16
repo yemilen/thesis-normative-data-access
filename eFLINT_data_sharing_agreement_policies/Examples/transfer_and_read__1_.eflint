@@ -1,0 +1,61 @@
+#
+
+//place your fact-type, act-type and duty-type declarations here
+
+Fact company Identified by X, Y
+
+Fact dataset Identified by D1
+
+Fact owner-of   Identified by dataset * company
+Fact has-access Identified by dataset * company
+  Holds when owner-of(dataset, company)
+           , been-granted-access(dataset, company)
+Fact been-granted-access Identified by dataset * company
+
+Placeholder new-owner For company
+Placeholder old-owner For company
+Placeholder owner     For company
+
+Act transfer
+  Actor old-owner
+  Recipient new-owner
+  Related to dataset
+  When old-owner != new-owner
+  Terminates owner-of(dataset, old-owner)
+  Creates owner-of(dataset, new-owner)
+  Holds when owner-of(company=old-owner)
+
+Act grant-access
+  Actor company1
+  Recipient company2
+  Related to dataset
+  Creates been-granted-access(dataset, company2)
+  Holds when owner-of(dataset, company1)
+
+Act read
+  Actor company
+  Recipient owner
+  Related to dataset When owner-of(dataset, owner)
+  Holds when permission-to-read(dataset, company)
+
+Fact permission-to-read Identified by dataset * company
+  Holds when has-access()
+
+##
+
+
+
+###
+
+owner-of(dataset(D1), company(X)).
+
+####
+
+transfer(X,Y,D1).
+transfer(Y,X,D1).
+transfer(X,Y,D1).
+grant-access(Y, X, D1).
+?has-access(D1, Y).
+?has-access(D1, X).
+read(company=X, dataset=D1).
+read(company=Y, dataset=D1).

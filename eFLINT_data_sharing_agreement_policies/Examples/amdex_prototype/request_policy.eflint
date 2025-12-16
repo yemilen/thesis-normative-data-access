@@ -1,0 +1,54 @@
+// this policy is instantiated by executing `request_insights` and providing:
+// * the ID of a consumer
+// * the ID of an algorithm (python script)
+// * the purpose for which the algorithm and data are brought together to provide insights
+Fact request          Identified by consumer * algorithm * purpose
+
+// this invariant ensures unique instantiation
+Invariant unique: (Forall request, request' : request == request' When request && request')
+
+Event request_insights
+  Related to consumer, algorithm, purpose
+  Creates request()
+  Holds when Not(Exists request: request) // request has not been made yet
+
+// the consumer provides an algorithm to produce some insights
+Fact consumer Derived from request.consumer
+// the purpose for which the consumer whiches to produce the insights
+Fact purpose Derived from request.purpose
+// the algorithm to produce the insight
+Fact algorithm Derived from request.algorithm
+
+// the producer provides data from which the insights are to be computed
+// presence of an instance of this fact determines this producer has accepted the request
+Fact producer
+
+Act accept_request
+  Actor producer
+  Recipient consumer
+  Creates producer
+         ,share_insights_obligation() // producer gives themselves the obligation to complete the transaction
+  Holds when Not(Exists producer: producer) // only one producer can accept
+
+Duty share_insights_obligation
+  Holder producer
+  Claimant consumer
+  Violated when Not(producer) // violated when the producer has withdrawn 
+  
+Act deny_sharing_insights
+  Actor producer
+  Recipient consumer
+  Terminates producer // producer withdraws from the transaction
+            ,share_insights_obligation() When not_for_purpose()
+  Holds when producer
+
+// if an instance of `not_for_purpose` holds true, 
+// then the producer has indicated they believe the algorithm is not used for the given purpose
+Fact not_for_purpose Identified by producer * algorithm * purpose
+
+Act share_insights
+  Actor producer
+  Recipient consumer
+  Terminates producer
+            ,share_insights_obligation()
+  Holds when producer

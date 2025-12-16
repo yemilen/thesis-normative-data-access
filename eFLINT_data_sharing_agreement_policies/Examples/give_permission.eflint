@@ -1,0 +1,46 @@
+#
+
+Fact producer
+Fact employee
+Fact role Identified by "researcher", "radiologist", "marketer" // the fact role is identified by the researcher , radiologist, marketer
+Fact datasets Identified by "genetics", "prognosis", "gender" // the fact dataset is identified by type genetics, prognosis, gender
+Fact accessible Identified by role * datasets // the fact that a role can access a dataset is defined by a role * dataset
+Fact permission_to_access Identified by employee * datasets //
+Fact role_of Identified by role * employee //  identified the person
+
+Act give_access
+  Actor producer
+  Recipient employee
+  Related to datasets
+  Creates permission_to_access(employee, datasets)
+  Holds when accessible(role, datasets) &&
+                      role_of (role, employee)
+
+
+Act access_data
+  Actor employee
+  Recipient producer
+  Related to datasets
+  Holds when permission_to_access(employee, datasets)
+
+##
+
+
+
+###
+
+accessible ("researcher", "genetics").
+accessible ("researcher", "prognosis").
+employee (Bob).
+producer (Alice).
+role_of ("researcher", Bob).
+role_of ("marketer", Chloe).
+employee (Chloe).
+
+####
+
+give_access(Alice, Bob, "prognosis").  // Alice give BOB access to prpgnosis dataset
+//give_access(Alice, Chloe, "prognosis"). // alice give chloe access to prognosis dataset
+
+access_data(Bob, Alice, "prognosis").// Bob access data prognosis
+//access_data(Bob, Alice, "genetics"). // Bob access 

@@ -1,0 +1,31 @@
+Fact member Identified by string
+Placeholder Bob For company
+Placeholder Alice For consortium
+Fact consortium Identified by x
+Fact company Identified by Y
+Fact dataset Identified by Dataset1
+Fact member-of identified by company * consortium
+Fact permitted-access Identified by dataset * company
+  Holds when member-of (company, consortium).
+
+Act check-authorized-member
+  Actor Bob
+  Recipient Alice
+  Related to consortium
+  Holds when member-of (company, consortium)
+Act check-permitted member
+  Actor Bob
+  Recipient Alice
+  Related to dataset
+  Holds when permitted-access (dataset, company)
+Act grant-access
+  Actor Bob
+  Recipient Alice
+  Related to dataset
+  Holds when permitted-access(dataset, company).
+
+
+
+?member-of(x,y).
+?permitted-access(Dataset1, y).
+?grant-access(x, y , Dateset1).
